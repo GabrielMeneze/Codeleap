@@ -4,6 +4,7 @@ import axios from 'axios';
 import trash from '../../Imgs/trash.png'
 import edit from '../../Imgs/pencil.png'
 import { useHistory } from 'react-router-dom';
+import Idlist from '../../components/Idlist';
 import "../Home/style.css";
 
 function MainScreen() {
@@ -152,6 +153,7 @@ function MainScreen() {
                         )
                     })}
                 </div>
+                <Idlist/>
             </main>
         </body>
     )
