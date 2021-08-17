@@ -1,0 +1,202 @@
+*{margin: 0;
+    padding: 0;
+    }
+    
+    ul{
+        display: flex;
+        list-style-type: none;
+    }
+    h2{
+        font-family: serif;
+        font-weight: 200;
+    }
+    a{
+        text-decoration: none;
+        color: white;
+        font-family: serif;
+    }
+    hr{
+        width: 84%;
+        margin: auto;
+    }
+    
+    
+    main{
+        background-color: #C4C4C4;
+    }
+    
+    .form{
+        width: 54%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 260px;
+        margin: auto;
+    }
+    
+    .control{
+        width: 84%;
+        margin: auto;
+    }
+    
+    .field{
+        padding: 10px;
+    }
+    
+    .form-btn{
+        width: 98%;
+        background-color: white;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .btnSend{
+        background-color: #4FB4D6;
+        color: white;
+        width: 80px;
+        height: 32px;
+        border: none;
+    }
+    
+    button:disabled,
+    button[disabled]{
+      border: 1px solid #999999;
+      background-color: #cccccc;
+      color: #666666;
+    }
+    
+    .division{
+    height: 20px;
+    background-color: #C4C4C4;
+    }
+    
+    .input1{
+        width: 99%;
+        height: 30px;
+        border: none;
+        background-color: #C4C4C4;
+    }
+    
+    .input2{
+        width: 99%;
+        height: 80px;
+        border: none;
+        background-color: #C4C4C4;
+    }
+    
+    .Publication{
+        padding: 16px;
+    }
+    
+    .itemmap{
+        width: 54%;
+        margin: auto;
+        background-color: white;
+    }
+    
+    .title{
+        background-color: rgb(19, 18, 18);
+        width: 84%;
+        color: rgb(214, 202, 202);
+        margin: auto;
+        display: flex;
+    }
+    
+    .title-content{
+        width: 70%;
+        position: relative;
+        margin-left: 40px;
+    }
+    
+    .title-btn{
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .img-array{
+        width: 100%;
+        display: flex;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    
+    .imgsbtns{
+        width: 24px;
+        height: 24px;
+        margin: auto;
+    }
+    
+    .click-img{
+        background-color: rgb(19, 18, 18);
+        border: none;
+    }
+    
+    .username{
+        width: 84%;
+        color: grey;
+        margin: auto;
+        background-color: #C4C4C4;
+    }
+    
+    .username p{
+        background-color: #C4C4C4;
+    }
+    
+    .content{
+            width: 84%;
+            color: rgb(37, 37, 37);
+            margin: auto;
+            background-color: #C4C4C4;
+    }
+    
+    
+     
+    
+    
+    
+    .container_bloco {
+        width: 100%;
+    }
+    
+    .bloco-imagem {
+        display: flex;
+        padding: 20px;
+    }
+    
+    .imagem {
+        width: 200px;
+        height: 112px;
+        display: flex;
+    }
+    
+    .imagem img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .container-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container-buttons button {
+        font-size: 0.95em;
+        padding: 6px;
+        font-weight: 400;
+        color: var(--color-text-white);
+        background-color: var(--secundary-color);
+        font-family: "Lulo Clean W01 One Bold";
+        transform-style: initial;
+    }
+    
+    .container-buttons button:hover {
+        transition: 0.5s;
+        background-color: var(--main-color-01);
+        color: white;
+    }
+    
+    
