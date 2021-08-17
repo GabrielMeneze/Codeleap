@@ -5,10 +5,11 @@ import trash from '../../Imgs/trash.png'
 import edit from '../../Imgs/pencil.png'
 import { useHistory } from 'react-router-dom';
 import Idlist from '../../components/Idlist';
+import ModalDelete from '../../components/Modaldelete/modaldelete';
 import "../Home/style.css";
+import { Modal, Button } from 'react-bootstrap'
 
 function MainScreen() {
-
     const history = useHistory();
 
     // localStorage values
@@ -20,7 +21,12 @@ function MainScreen() {
     const [content, setContent] = useState('')
 
     // redux id values
-    const [idvalue, setIdvalue] = useState([684, 683, 682])
+    const [idvalue, setIdvalue] = useState([684, 683])
+
+    // Modals values
+    const [modalshow, setModalshow] = React.useState(false)
+    const [deleteid, setDeleteid] = useState()
+
 
     // GET
     useEffect(() => {
@@ -39,8 +45,8 @@ function MainScreen() {
             title: title,
             content: content
         })
-            .then(res => { 
-                console.log(res) 
+            .then(res => {
+                console.log(res)
                 history.push('/MainScreen?')
             })
     }
@@ -52,8 +58,8 @@ function MainScreen() {
             title: title,
             content: content
         })
-            .then(res => { 
-                console.log(res) 
+            .then(res => {
+                console.log(res)
                 history.push('/MainScreen?')
             })
     }
@@ -65,9 +71,39 @@ function MainScreen() {
             id: event
         })
             .then(res => {
-                 console.log(res) 
-                 history.push('/mainscreen')
+                console.log(res)
+                history.push('/mainscreen')
             })
+    }
+
+    function ModalFrase(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                style={{ fontFamily: "Questrial" }}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Frase da foto
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                        Digite sua frase abaixo
+                    </p>
+                    <Button onClick={() => {
+                        Delete(deleteid)
+                        setModalshow(false)
+                    }}>YES</Button>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Fechar</Button>
+                </Modal.Footer>
+            </Modal>
+        );
     }
 
     return (
@@ -96,7 +132,7 @@ function MainScreen() {
                             />
                         </div>
                         <div className="form-btn">
-                                <button disabled={!title || !content} type="submit" className="btnSend">CREATE</button>
+                            <button disabled={!title || !content} type="submit" className="btnSend">CREATE</button>
                         </div>
                     </div>
                 </form>
@@ -113,10 +149,16 @@ function MainScreen() {
                                 if (idvalue[i] === item.id) {
                                     return (
                                         <div className="img-array">
-                                            <button className="click-img" onClick={() => { Delete(idvalue[i]) }}>
-                                                <img src={trash} alt="botão excluir" className="imgsbtns" />
-                                            </button>
 
+                                            <Button
+                                                className="click-img"
+                                                onClick={() => {
+                                                    setDeleteid(idvalue[i]);
+                                                    setModalshow(true)
+                                                }}>
+                                                <img src={trash} alt="botão excluir" className="imgsbtns" />
+                                            </Button>
+                                           <ModalFrase show={modalshow} onHide={() => setModalshow(false)} />
                                             <button className="click-img">
                                                 <img src={edit} alt="botão editar" className="imgsbtns" />
                                             </button>
@@ -153,7 +195,6 @@ function MainScreen() {
                         )
                     })}
                 </div>
-                <Idlist/>
             </main>
         </body>
     )

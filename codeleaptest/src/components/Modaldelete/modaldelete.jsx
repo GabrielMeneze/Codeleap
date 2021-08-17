@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap'
 import Delete from '../../Pages/Home/MainScreen'
 
 export default function ModalDelete(props) {
-    
+
     return (
         <Modal
             {...props}
@@ -12,20 +12,20 @@ export default function ModalDelete(props) {
             centered
             style={{ fontFamily: "Questrial" }}
         >
-            <Modal.Header>
+            <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    DELETE THE POST
+                    Are you sure you want to delete this item?
                 </Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
-                <p>
-                    are you sure?
-                </p>
                 <Button onClick={Delete}>YES</Button>
             </Modal.Body>
+
             <Modal.Footer>
                 <Button onClick={props.onHide}>CLOSE</Button>
             </Modal.Footer>
+
         </Modal>
     );
 }
