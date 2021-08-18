@@ -8,7 +8,7 @@
     }
     h2{
         font-family: serif;
-        font-weight: 200;
+        font-weight: 120;
     }
     a{
         text-decoration: none;
@@ -105,13 +105,21 @@
     
     .title-content{
         width: 70%;
+        display: flex;
+        align-items: center;
         position: relative;
-        margin-left: 40px;
+        margin-left: 30px;
+    }
+
+    .title-content h2{
+        font-family: 120;
     }
     
     .title-btn{
         width: 30%;
+        
         display: flex;
+        align-items: center;
         justify-content: space-around;
     }
     
@@ -135,68 +143,21 @@
         border: none;
     }
     
-    .username{
-        width: 84%;
-        color: grey;
+    .Space{
+        width: 90%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin: auto;
-        background-color: #C4C4C4;
     }
-    
-    .username p{
-        background-color: #C4C4C4;
-    }
-    
+
     .content{
             width: 84%;
             color: rgb(37, 37, 37);
             margin: auto;
             background-color: #C4C4C4;
-    }
-    
-    
-     
-    
-    
-    
-    .container_bloco {
-        width: 100%;
-    }
-    
-    .bloco-imagem {
-        display: flex;
-        padding: 20px;
-    }
-    
-    .imagem {
-        width: 200px;
-        height: 112px;
-        display: flex;
-    }
-    
-    .imagem img {
-        width: 100%;
-        height: 100%;
-    }
-    
-    .container-buttons {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .container-buttons button {
-        font-size: 0.95em;
-        padding: 6px;
-        font-weight: 400;
-        color: var(--color-text-white);
-        background-color: var(--secundary-color);
-        font-family: "Lulo Clean W01 One Bold";
-        transform-style: initial;
-    }
-    
-    .container-buttons button:hover {
-        transition: 0.5s;
-        background-color: var(--main-color-01);
-        color: white;
     }
     
     

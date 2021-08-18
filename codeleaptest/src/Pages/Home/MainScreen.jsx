@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-// import Header from '../../components/Header'
+import { Modal, Button } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux';
+
 import trash from '../../Imgs/trash.png'
 import edit from '../../Imgs/pencil.png'
-import { useHistory } from 'react-router-dom';
-import Idlist from '../../components/Idlist';
-import ModalDelete from '../../components/Modaldelete/modaldelete';
+import Header from '../../Components/Header';
+
 import "../Home/style.css";
-import { Modal, Button } from 'react-bootstrap'
 
 function MainScreen() {
-    const history = useHistory();
+    const dispatch = useDispatch();
 
     // localStorage values
     const [nameuser, setNameuser] = React.useState(localStorage.getItem("DataUser"))
@@ -20,19 +20,17 @@ function MainScreen() {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
 
-    // redux id values
-    const [idvalue, setIdvalue] = useState([684, 683])
-
     // Modals values
     const [modalshow, setModalshow] = React.useState(false)
     const [deleteid, setDeleteid] = useState()
+    const [modalshow2, setModalshow2] = React.useState(false)
+    const [patchpost, setPatchpost] = useState()
 
 
     // GET
     useEffect(() => {
         axios.get('http://dev.codeleap.co.uk/careers/')
             .then(res => {
-                console.log(res.data.results)
                 setDatapost(res.data.results)
             })
     }, [])
@@ -46,21 +44,22 @@ function MainScreen() {
             content: content
         })
             .then(res => {
-                console.log(res)
-                history.push('/MainScreen?')
+                console.log(res.data.id)
+                dispatch({ type: 'ADD_ID', id: res.data.id })
+                window.location.reload(true)
             })
     }
 
     // PATCH
     function Patch(event) {
         event.preventDefault();
-        axios.patch('http://dev.codeleap.co.uk/careers/' + event + '/', {
+        axios.patch('http://dev.codeleap.co.uk/careers/' + patchpost + '/', {
             title: title,
             content: content
         })
             .then(res => {
                 console.log(res)
-                history.push('/MainScreen?')
+                window.location.reload(true)
             })
     }
 
@@ -72,11 +71,11 @@ function MainScreen() {
         })
             .then(res => {
                 console.log(res)
-                history.push('/mainscreen')
+                window.location.reload(true)
             })
     }
 
-    function ModalFrase(props) {
+    function ModalDelete(props) {
         return (
             <Modal
                 {...props}
@@ -85,14 +84,9 @@ function MainScreen() {
                 centered
                 style={{ fontFamily: "Questrial" }}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Frase da foto
-                    </Modal.Title>
-                </Modal.Header>
                 <Modal.Body>
                     <p>
-                        Digite sua frase abaixo
+                        are you sure you want to delete this item?
                     </p>
                     <Button onClick={() => {
                         Delete(deleteid)
@@ -100,15 +94,61 @@ function MainScreen() {
                     }}>YES</Button>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide}>Fechar</Button>
+                    <Button onClick={props.onHide}>CLOSE</Button>
                 </Modal.Footer>
             </Modal>
         );
     }
 
+    function ModalPath(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                style={{ fontFamily: "Questrial" }}
+            >
+                <Modal.Body>
+                    <form onSubmit={Patch} className="form">
+                        <div className="control">
+                            <div className="field">
+                                <h2>Edit your post</h2>
+                                <textarea
+                                    className="input1"
+                                    type="text"
+                                    value={title}
+                                    placeholder="enter your title"
+                                    onClick={event => setTitle(event.target.value)}
+                                />
+                            </div>
+                            <div className="field">
+                                <textarea
+                                    className="input2"
+                                    type="text"
+                                    value={content}
+                                    placeholder="insert your content"
+                                    onC={event => setContent(event.target.value)}
+                                />
+                            </div>
+                            <div className="form-btn">
+                                <button onClick={() => setModalshow2(false)} disabled={!title || !content} type="submit" className="btnSend">CREATE</button>
+                            </div>
+                        </div>
+                    </form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>CLOSE</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+
+    const ids = useSelector(state => state.data);
+
     return (
         <body>
-            {/* <Header /> */}
+            <Header />
             <main>
                 <form onSubmit={Post} className="form">
                     <div className="control">
@@ -145,23 +185,30 @@ function MainScreen() {
                         // It checks the id's that were saved in redux with the id's of the publications.
                         // If it is the same, the user can edit and delete the post
                         function Idchecker() {
-                            for (let i = 0; i < idvalue.length; i++) {
-                                if (idvalue[i] === item.id) {
+                            for (let i = 0; i < ids.length; i++) {
+                                if (ids[i] === item.id) {
                                     return (
                                         <div className="img-array">
 
-                                            <Button
+                                            <button
                                                 className="click-img"
                                                 onClick={() => {
-                                                    setDeleteid(idvalue[i]);
+                                                    setDeleteid(ids[i]);
                                                     setModalshow(true)
                                                 }}>
                                                 <img src={trash} alt="botão excluir" className="imgsbtns" />
-                                            </Button>
-                                           <ModalFrase show={modalshow} onHide={() => setModalshow(false)} />
-                                            <button className="click-img">
+                                            </button>
+                                            <ModalDelete show={modalshow} onHide={() => setModalshow(false)} />
+
+                                            <button
+                                                className="click-img"
+                                                onClick={() => {
+                                                    setPatchpost(ids[i]);
+                                                    setModalshow2(true)
+                                                }}>
                                                 <img src={edit} alt="botão editar" className="imgsbtns" />
                                             </button>
+                                            <ModalPath show={modalshow2} onHide={() => setModalshow2(false)} />
                                         </div>
                                     )
                                 }
@@ -181,16 +228,15 @@ function MainScreen() {
                                         </div>
                                     </div>
 
-                                    <div className="username">
-                                        <p>@{item.username}</p>
-                                    </div>
-
                                     <div className="content">
-                                        <h3>{item.content}</h3>
+                                        
+                                        <div className="Space">
+                                            <p>@{item.username}</p>
+                                            <h3>{item.content}</h3>
+                                            </div>
                                     </div>
 
                                 </div>
-                                <hr />
                             </div>
                         )
                     })}

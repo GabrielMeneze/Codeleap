@@ -13,16 +13,27 @@
 }
 
 .bloco{
-    width: 400px;
-    height: 280px;
+    width: 440px;
+    height: 260px;
     padding: 20px;
     background-color: #fffafa;
 }
-.form-input{
-    width: 360px;
-    height: 20px;
+
+.field2{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field input{
+    width: 400px;
+    height: 30px;
+    border: thin;
     border-radius: 6px;
-    border-width: thin;
+    background-color: #c4c4c4;
+    color: white;
+    font-family: sans-serif;
 }
 
 .singup-btn{
@@ -33,4 +44,11 @@
     background-color: black;
     color: white;
     font-family: sans-serif;
+}
+
+.form-btn{
+    width: 74%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

@@ -3,12 +3,12 @@
     padding: 0;
 }
 
-.cabecalho{
+.header{
     display: flex;
 }
 
-.logotipo{
-    width: 21%;
+.logo{
+    width: 22%;
     height: 72px;
     display: flex;
     justify-content: center;
