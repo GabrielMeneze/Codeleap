@@ -229,11 +229,11 @@ function MainScreen() {
                                     </div>
 
                                     <div className="content">
-                                        
+
                                         <div className="Space">
                                             <p>@{item.username}</p>
                                             <h3>{item.content}</h3>
-                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
